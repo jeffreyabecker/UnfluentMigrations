@@ -17,37 +17,37 @@ namespace UnfluentMigrations.Builders
         {
             return new ConstraintColumnDefinition { Column = columnName, Direction = SortDirection.Desc };
         }
-        public static OperationBuilderSurface<CreateUniqueConstratintOperation> CreateUniqueConstraint(
+        public static OperationBuilderSurface<CreateUniqueConstraintOperation> CreateUniqueConstraint(
             IMigrationBuilder builder, string name, string table, IEnumerable<ConstraintColumnDefinition> columns,
             string schema = null, string catalog = null)
         {
-            var op = new CreateUniqueConstratintOperation
+            var op = new CreateUniqueConstraintOperation
             {
                 Name = new SubObjectName(catalog, schema, table, name),
                 Columns = columns.ToList()
             };
             builder.AddOperation(op);
-            return new OperationBuilderSurface<CreateUniqueConstratintOperation>(op);
+            return new OperationBuilderSurface<CreateUniqueConstraintOperation>(op);
         }
-        public static OperationBuilderSurface<CreateUniqueConstratintOperation> CreateUniqueConstraint(
+        public static OperationBuilderSurface<CreateUniqueConstraintOperation> CreateUniqueConstraint(
             IMigrationBuilder builder, string name, string table, ConstraintColumnDefinition column,
             string schema = null, string catalog = null)
         {
             return CreateUniqueConstraint(builder, name, table, new[] {column}, schema, catalog);
         }
-        public static OperationBuilderSurface<CreateUniqueConstratintOperation> CreateUniqueConstraint(
+        public static OperationBuilderSurface<CreateUniqueConstraintOperation> CreateUniqueConstraint(
             IMigrationBuilder builder, string name, string table, string[] columns,
             string schema = null, string catalog = null)
         {
             return CreateUniqueConstraint(builder, name, table, columns.Select(x=>Ascending(x)), schema, catalog);
         }
-        public static OperationBuilderSurface<CreateUniqueConstratintOperation> CreateUniqueConstraint(
+        public static OperationBuilderSurface<CreateUniqueConstraintOperation> CreateUniqueConstraint(
             IMigrationBuilder builder, string name, string table, string column,
             string schema = null, string catalog = null)
         {
             return CreateUniqueConstraint(builder, name, table, new []{column}, schema, catalog);
         }
-        public static OperationBuilderSurface<CreatePrimaryKeyConstraintOperation> CreatePrimaryKeyConstraintOperation(
+        public static OperationBuilderSurface<CreatePrimaryKeyConstraintOperation> CreatePrimaryKey(
             IMigrationBuilder builder, string name, string table, IEnumerable<ConstraintColumnDefinition> columns,
             string schema = null, string catalog = null)
         {
@@ -63,13 +63,13 @@ namespace UnfluentMigrations.Builders
             IMigrationBuilder builder, string name, string table, ConstraintColumnDefinition column,
             string schema = null, string catalog = null)
         {
-            return CreatePrimaryKeyConstraintOperation(builder, name, table, new[] { column }, schema, catalog);
+            return CreatePrimaryKey(builder, name, table, new[] { column }, schema, catalog);
         }
         public static OperationBuilderSurface<CreatePrimaryKeyConstraintOperation> CreatePrimaryKey(
             IMigrationBuilder builder, string name, string table, string[] columns,
             string schema = null, string catalog = null)
         {
-            return CreatePrimaryKeyConstraintOperation(builder, name, table, columns.Select(x => Ascending(x)), schema, catalog);
+            return CreatePrimaryKey(builder, name, table, columns.Select(x => Ascending(x)), schema, catalog);
         }
         public static OperationBuilderSurface<CreatePrimaryKeyConstraintOperation> CreatePrimaryKey(
             IMigrationBuilder builder, string name, string table, string column,

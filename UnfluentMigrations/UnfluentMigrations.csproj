@@ -9,6 +9,6 @@
     <PackageReference Include="System.ValueTuple" Version="4.3.0" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Dialects\SqlConversion\Operations\" />
+    <Folder Include="Dialects\SqlConversion\Renderers\" />
   </ItemGroup>
 </Project>

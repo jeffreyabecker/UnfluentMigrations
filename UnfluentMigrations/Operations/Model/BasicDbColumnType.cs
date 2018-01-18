@@ -10,7 +10,7 @@ namespace UnfluentMigrations.Operations.Model
         public string ExplicitStoreType { get; set; }
         public int? Precision { get; set; }
         public int? Size { get; set; }
-        public int? Precesion { get; set; }
+        
     }
 
 

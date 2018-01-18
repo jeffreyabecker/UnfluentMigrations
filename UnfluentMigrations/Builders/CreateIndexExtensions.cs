@@ -12,7 +12,7 @@ namespace UnfluentMigrations.Builders
             IEnumerable<IndexColumnDefinition> columns,
             IEnumerable<IndexColumnDefinition> includes = null,
             string schema = null, string catalog = null,
-            string filter= null, bool unique = false )
+            string filter= null)
         {
             var op = new CreateIndexOperation
             {
@@ -20,7 +20,7 @@ namespace UnfluentMigrations.Builders
                 Columns = columns.ToList(),
                 Includes = (includes ?? new List<IndexColumnDefinition>()).ToList(),
                 Filter = filter,
-                Unique = unique
+                
             };
             builder.AddOperation(op);
             return new OperationBuilderSurface<CreateIndexOperation>(op);

@@ -22,8 +22,6 @@ namespace UnfluentMigrations.Operations
 
         public virtual bool Cycle { get; set; }
         public DbType DbType { get; set; }
-
-
-
+        public int? Cache { get; set; }
     }
 }

@@ -25,7 +25,6 @@ namespace UnfluentMigrations.Operations
                 Includes = Includes.ToList(),
                 Filter = Filter,
                 Decorations = Decorations,
-                Unique = Unique
 
             };
         }

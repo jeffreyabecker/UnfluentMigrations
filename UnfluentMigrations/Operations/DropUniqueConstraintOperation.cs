@@ -1,11 +1,11 @@
 namespace UnfluentMigrations.Operations
 {
-    public class DropUniqueConstratintOperation : DropConstraintOperation
+    public class DropUniqueConstraintOperation : DropConstraintOperation
     {
         
         public override IMigrationOperation Reverse()
         {
-            return new CreateUniqueConstratintOperation { };
+            return new CreateUniqueConstraintOperation { };
         }
     }
 }

@@ -6,6 +6,7 @@ using System.IO;
 using System.Threading.Tasks;
 using UnfluentMigrations.Dialects.DataAccess;
 using UnfluentMigrations.Operations;
+using UnfluentMigrations.Operations.Model;
 
 namespace UnfluentMigrations.Dialects
 {
@@ -18,7 +19,9 @@ namespace UnfluentMigrations.Dialects
         ISqlLogRenderer CreateLogRenderer();
         Task Execute(IEnumerable<IMigrationOperation> expressions, ISqlExecutor executor);
 
-        
+        string Quote(ObjectName name);
+        string Quote(SubObjectName name);
+        string RenderDbType(IDbColumnType operationDbType);
     }
 
     public interface ISqlLogRenderer

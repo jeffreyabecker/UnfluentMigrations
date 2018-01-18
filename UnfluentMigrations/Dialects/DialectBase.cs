@@ -9,6 +9,7 @@ using UnfluentMigrations.Dialects.DataAccess;
 using UnfluentMigrations.Dialects.SqlConversion;
 
 using UnfluentMigrations.Operations;
+using UnfluentMigrations.Operations.Model;
 
 namespace UnfluentMigrations.Dialects
 {
@@ -25,34 +26,64 @@ namespace UnfluentMigrations.Dialects
 
         protected virtual List<IOperationRenderer> GenerateRenderers()
         {
-            INameQuoter quoter = GenerateNameQuoter();
+
             var result = new List<IOperationRenderer>();
-            //result.Add(new AddColumnRenderer(quoter));
-            //result.Add(new AddForeignKeyRenderer(quoter));
-            //result.Add(new AlterColumnRenderer(quoter));
-            //result.Add(new AlterSchemaRenderer(quoter));
-            //result.Add(new CreateConstraintRenderer(quoter));
-            //result.Add(new CreateIndexRenderer(quoter));
-            //result.Add(new CreateSchemaRenderer(quoter));
-            //result.Add(new CreateSequenceRenderer(quoter));
-            //result.Add(new CreateTableRenderer(quoter));
-            //result.Add(new DropColumnRenderer(quoter));
-            //result.Add(new DropConstraintRenderer(quoter));
-            //result.Add(new DropForeignKeyRenderer(quoter));
-            //result.Add(new DropIndexRenderer(quoter));
-            //result.Add(new DropSchemaRenderer(quoter));
-            //result.Add(new DropSequenceRenderer(quoter));
-            //result.Add(new DropTableRenderer(quoter));
-            //result.Add(new ExecuteSqlStatementRenderer(quoter));
-            //result.Add(new RenameColumnRenderer(quoter));
-            //result.Add(new RenameTableRenderer(quoter));
+            //result.Add(new AddColumnRenderer(this));
+            //result.Add(new AddForeignKeyRenderer(this));
+            //result.Add(new AlterColumnRenderer(this));
+            //result.Add(new AlterSchemaRenderer(this));
+            //result.Add(new CreateConstraintRenderer(this));
+            //result.Add(new CreateIndexRenderer(this));
+            //result.Add(new CreateSchemaRenderer(this));
+            //result.Add(new CreateSequenceRenderer(this));
+            //result.Add(new CreateTableRenderer(this));
+            //result.Add(new DropColumnRenderer(this));
+            //result.Add(new DropConstraintRenderer(this));
+            //result.Add(new DropForeignKeyRenderer(this));
+            //result.Add(new DropIndexRenderer(this));
+            //result.Add(new DropSchemaRenderer(this));
+            //result.Add(new DropSequenceRenderer(this));
+            //result.Add(new DropTableRenderer(this));
+            //result.Add(new ExecuteSqlStatementRenderer(this));
+            //result.Add(new RenameColumnRenderer(this));
+            //result.Add(new RenameTableRenderer(this));
             return result;
 
         }
+        protected virtual string BeginQuote {get;} = "\"";
+        protected virtual string EndQuote { get; } = "\"";
 
-        protected virtual INameQuoter GenerateNameQuoter()
+
+
+        protected virtual string Quote(string part)
         {
-            return new NameQuoter();
+            part = part.Replace(BeginQuote, BeginQuote + BeginQuote);
+
+            if (EndQuote != EndQuote)
+            {
+                part = part.Replace(EndQuote, EndQuote + EndQuote);
+            }
+
+            return BeginQuote + part + EndQuote;
+        }
+        public virtual string Quote(ObjectName name)
+        {
+            var parts = new[] { name.Catalog, name.Schema, name.Name }
+                .Where(x => !String.IsNullOrEmpty(x))
+                .Select(Quote);
+            var quote1 = String.Join(".", parts);
+            var quote = quote1;
+            return quote;
+        }
+
+        public virtual string Quote(SubObjectName name)
+        {
+            var parts = new[] { name.Catalog, name.Schema, name.ParentName, name.Name }
+                .Where(x => !String.IsNullOrEmpty(x))
+                .Select(Quote);
+            var quote1 = String.Join(".", parts);
+            var quote = quote1;
+            return quote;
         }
 
         public virtual ISqlExecutor CreateExecutor(DbConnection connection)

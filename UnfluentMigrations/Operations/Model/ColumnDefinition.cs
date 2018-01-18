@@ -26,7 +26,7 @@ namespace UnfluentMigrations.Operations.Model
     {
         public ColumnDefinition()
         {
-            DefaultValue = UndefinedDefaultValue.Instance;
+
         }
 
         public SubObjectName Name { get; set; }

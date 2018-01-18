@@ -6,7 +6,7 @@ namespace UnfluentMigrations.Builders
 {
     public static class CreateSequenceExtensions
     {
-        public static OperationBuilderSurface<CreateSequenceOperation> CreateSequence(this IMigrationBuilder builder, string name, string schema=null, string catalog = null, DbType dbType = DbType.Int64, long? startValue=null, long? increment = null, long? minValue = null, long? maxValue=null, bool cycle=false)
+        public static OperationBuilderSurface<CreateSequenceOperation> CreateSequence(this IMigrationBuilder builder, string name, string schema=null, string catalog = null, DbType dbType = DbType.Int64, long? startValue=null, long? increment = null, long? minValue = null, long? maxValue=null, bool cycle=false, int? cache = null)
         {
             var op = new CreateSequenceOperation
             {
@@ -16,7 +16,8 @@ namespace UnfluentMigrations.Builders
                 MaxValue = maxValue,
                 MinValue = minValue,
                 Increment = increment,
-                DbType = dbType
+                DbType = dbType,
+                Cache = cache
             };
             builder.AddOperation(op);
             return new OperationBuilderSurface<CreateSequenceOperation>(op);
